@@ -1,26 +1,65 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {
+    Button,
+    Box,
+    Flex,
+    Spacer,
+    Image, Center, Text,
+    Avatar, AvatarBadge, AvatarGroup, Menu, MenuButton, MenuList, MenuItem
+} from "@chakra-ui/react";
+import {ColorModeToggler} from "./theme/color-mode-toggler";
+import {Link, useNavigate} from "react-router-dom";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+    return (
+        <div>
+            <Flex w='100%' p={4} mb={100} mt={30}>
+                <Center w='100px'>
+                    <Image src={require('./assets/drive.png')} boxSize='100px'
+                           objectFit='cover' borderRadius='full' alt='Dan Abramov'/>
+                </Center>
+
+                <Center flex={1}>
+                    <Text>home</Text>
+                </Center>
+                <Center flex={1}>
+                    <Text>home</Text>
+                </Center>
+                <Center flex={1}>
+                    <Text>home</Text>
+                </Center>
+
+                <Spacer/>
+                <Center>
+
+                    <Menu>
+
+                        <MenuButton>
+                            <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov'/>
+                        </MenuButton>
+                        <MenuList>
+                            <MenuItem>
+                                <Link to="/your-route" >
+                                    Your Menu Item
+                                </Link>
+                            </MenuItem>
+                            <MenuItem onClick={() => alert("hello")}>Create a Copy</MenuItem>
+                            <MenuItem>Mark as Draft</MenuItem>
+                            <MenuItem>Delete</MenuItem>
+                            <MenuItem>Attend a Workshop</MenuItem>
+                        </MenuList>
+                    </Menu>
+                </Center>
+
+            </Flex>
+            <ColorModeToggler/>
+            <Button colorScheme='purple'>hello chakra</Button>
+
+        </div>
+    );
 }
 
 export default App;
