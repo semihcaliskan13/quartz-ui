@@ -10,9 +10,23 @@ import {
 } from "@chakra-ui/react";
 import { ColorModeToggler } from "./theme/color-mode-toggler";
 import { Link, useNavigate } from "react-router-dom";
+import JobsTable from './components/JobsTable';
+import Job from './components/Job';
+import { JobType } from './api/types/Job';
 
 function App() {
 
+    const JobObject: JobType = {
+        jobName: "my job",
+        jobGroup: "",
+        jobDataMap: {},
+        triggersOfJob: {
+            cronTime: "",
+            group: "",
+            fireTime: new Date,
+            name: "hello"
+        }
+    }
 
     return (
         <div>
@@ -66,8 +80,10 @@ function App() {
             <Box mt={200}>
                 <ColorModeToggler />
                 <Button colorScheme='purple'>hello chakra</Button>
-
+                
+                <Job job={JobObject}/>
             </Box>
+            <JobsTable/>
 
 
 
