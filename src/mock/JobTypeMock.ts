@@ -25,7 +25,9 @@ const mockJobTriggers1: JobTriggers = {
   const mockJob1: JobType = {
     jobName: "Job1",
     jobGroup: "JobGroup1",
-    jobDataMap: {},
+    jobDataMap: {
+      "name" : "email"
+    },
     triggersOfJob: mockJobTriggers1,
   };
   

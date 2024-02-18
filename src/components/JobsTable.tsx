@@ -3,17 +3,20 @@ import React from 'react'
 import './jobs-table.css'
 import mockJobs from '../mock/JobTypeMock'
 import Job from './Job'
-import ModalButton from './ModalButton'
+import ModalButton from './AddJob'
+import CustomModal from './CustomModal'
+import JobTriggers from './JobTriggers'
+import JobDatas from './JobDatas'
 
 const JobsTable = () => {
 
-    const mockJobData  = mockJobs;
+    const mockJobData = mockJobs;
     return (
         <div>
 
             <Center className='jobsTable'>
                 <Table verticalAlign={'center'} width={'50%'} variant='striped' colorScheme='teal'>
-                    <TableCaption>Imperial to metric conversion factors</TableCaption>
+                    <TableCaption placement='top' >Scheduled Jobs</TableCaption>
                     <Thead>
                         <Tr>
                             <Th>Job Name</Th>
@@ -25,36 +28,45 @@ const JobsTable = () => {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {mockJobData.map((job,index) => (
+                        {mockJobData.map((job, index) => (
                             <Tr key={index}>
-                            <Td>
-                                {job.jobName}
-                            </Td>
-                            <Td>
-                                {job.jobGroup}
-                            </Td>
-                            <Td>
-                               <ModalButton/>
-                            </Td>
-                            <Td>
-                                <Button colorScheme='facebook'>job</Button>
-                            </Td>
-                            <Td>
-                                <Button colorScheme='orange'>edit</Button>
-                            </Td>
-                            <Td>
-                                <Button colorScheme='red'>delete</Button>
-                            </Td>
-        
-                        </Tr>
+                                <Td>
+                                    {job.jobName}
+                                </Td>
+                                <Td>
+                                    {job.jobGroup}
+                                </Td>
+                                <Td>
+                                    <Button colorScheme='facebook'>See Job Datas</Button>
+                                </Td>
+                                <Td>
+                                    <CustomModal
+                                        buttonColorScheme='facebook'
+                                        buttonText='See Job Triggers'
+                                        modalHeader='Job Triggers'
+                                    >
+                                    <JobTriggers jobTriggers={job.triggersOfJob}/>
+
+                                    </CustomModal>
+                                </Td>
+                                <Td>
+                                <CustomModal
+                                        buttonColorScheme='pink'
+                                        buttonText='See Job Datas'
+                                        modalHeader='Job Datas'
+                                    >
+                                    <JobDatas jobDatas={job.jobDataMap}/>
+
+                                    </CustomModal>
+                                </Td>
+                                <Td>
+                                    <Button colorScheme='red'>delete</Button>
+                                </Td>
+
+                            </Tr>
                         ))}
                     </Tbody>
                     <Tfoot>
-                        <Tr>
-                            <Th>To convert</Th>
-                            <Th>into</Th>
-                            <Th isNumeric>multiply by</Th>
-                        </Tr>
                     </Tfoot>
                 </Table>
             </Center>

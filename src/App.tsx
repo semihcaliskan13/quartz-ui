@@ -13,6 +13,8 @@ import { Link, useNavigate } from "react-router-dom";
 import JobsTable from './components/JobsTable';
 import Job from './components/Job';
 import { JobType } from './api/types/Job';
+import ModalButton from './components/AddJob';
+import AddJob from './components/AddJob';
 
 function App() {
 
@@ -80,10 +82,15 @@ function App() {
             <Box mt={200}>
                 <ColorModeToggler />
                 <Button colorScheme='purple'>hello chakra</Button>
-                
-                <Job job={JobObject}/>
+
+                <Job job={JobObject} />
             </Box>
-            <JobsTable/>
+            <JobsTable />
+            <Box marginTop={10}>
+                <Center>
+                    <AddJob />
+                </Center>
+            </Box>
 
 
 
