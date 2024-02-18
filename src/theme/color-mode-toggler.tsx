@@ -5,7 +5,7 @@ export const ColorModeToggler = () => {
     return (
         <header>
             <Button onClick={toggleColorMode}>
-                Toggle to {colorMode === "light" ? "Dark" : "Light"}
+                Toggle to theme {colorMode === "light" ? "Dark" : "Light"}
             </Button>
         </header>
     );
