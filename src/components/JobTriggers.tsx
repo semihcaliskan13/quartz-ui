@@ -10,12 +10,13 @@ interface JobTriggersProps {
     console.log(jobTriggers);
 
   return (
-    <Table variant="striped" colorScheme="teal">
+    <Table variant='simple' colorScheme="teal">
       <Thead>
         <Tr>
           <Th>Cron Time</Th>
           <Th>Group</Th>
           <Th>Name</Th>
+          <Th>Fire Time</Th>
         </Tr>
       </Thead>
       <Tbody>
@@ -24,6 +25,7 @@ interface JobTriggersProps {
             <Td>{value.cronTime}</Td>
             <Td>{value.group}</Td>
             <Td>{value.name}</Td>
+            <Td>{value.fireTime.toLocaleString()}</Td>
           </Tr>
         ))}
       </Tbody>

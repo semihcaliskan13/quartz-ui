@@ -8,6 +8,7 @@ import JobDatas from './JobDatas'
 import { EditIcon, DeleteIcon } from '@chakra-ui/icons'
 import { Job } from '../api/types/Job'
 import { JobService } from '../api/services/JobService'
+import EditJob from './EditJob'
 
 const JobsTable = () => {
 
@@ -70,17 +71,22 @@ const JobsTable = () => {
                                         buttonColorScheme='facebook'
                                         buttonText='See Job Triggers'
                                         modalHeader='Job Triggers'
+                                        modalSize='xl'
                                     >
                                     <JobTriggers jobTriggers={job.triggersOfJob}/>
 
                                     </CustomModal>
                                 </Td>
                                 <Td>                           
-                               <IconButton
-                                icon={<EditIcon />}
-                                colorScheme='orange'
-                                aria-label='Edit'
-                               />                           
+                                <CustomModal
+                                        buttonText='Edit Job'
+                                        modalHeader='Edit Job'
+                                        modalSize='xl'
+                                        modalButton={<EditIcon/>}
+                                        modalType='edit'
+                                 > 
+                                    <EditJob job={job}/>
+                                </CustomModal>                   
                                 </Td>
                                 <Td>
                                 <IconButton
