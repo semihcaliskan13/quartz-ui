@@ -27,7 +27,6 @@ const CustomModal = ({buttonText, buttonColorScheme, children, modalHeader, init
                         {children}
                     </ModalBody>
                     <ModalFooter>
-                        <Button type='submit' colorScheme='whatsapp' mr={3}>Save</Button>
                         <Button colorScheme='blue' onClick={onClose}>
                             Close
                         </Button>

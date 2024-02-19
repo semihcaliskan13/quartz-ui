@@ -1,13 +1,13 @@
 import React from 'react'
-import { JobType } from '../api/types/Job'
+import { Job } from '../api/types/Job'
 import { Td, Tr } from '@chakra-ui/react'
 
 interface JobProps {
-    job: JobType
+    job: Job
 }
 
 
-const Job = ({ job }: JobProps) => {
+const JobComponent = ({ job }: JobProps) => {
     return (
         <div>
             
@@ -15,4 +15,4 @@ const Job = ({ job }: JobProps) => {
     )
 }
 
-export default Job
+export default JobComponent

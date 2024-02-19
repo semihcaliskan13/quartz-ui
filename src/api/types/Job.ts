@@ -1,8 +1,8 @@
-import { JobTriggers } from "./JobTriggers"
+import { TriggersOfJob } from "./JobTriggers"
 
-export type JobType = {
+export type Job = {
     jobName: string,
     jobGroup: string,
-    jobDataMap: {},
-    triggersOfJob: JobTriggers
+    jobData: {},
+    triggersOfJob: TriggersOfJob[]
 }

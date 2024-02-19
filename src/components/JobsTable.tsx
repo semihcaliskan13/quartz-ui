@@ -1,16 +1,35 @@
-import { Button, Center, Table, TableCaption, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr } from '@chakra-ui/react'
-import React from 'react'
+import { Button, Center, IconButton, Table, TableCaption, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
 import './jobs-table.css'
-import mockJobs from '../mock/JobTypeMock'
-import Job from './Job'
 import ModalButton from './AddJob'
 import CustomModal from './CustomModal'
 import JobTriggers from './JobTriggers'
 import JobDatas from './JobDatas'
+import { EditIcon, DeleteIcon } from '@chakra-ui/icons'
+import { Job } from '../api/types/Job'
+import { JobService } from '../api/services/JobService'
 
 const JobsTable = () => {
 
-    const mockJobData = mockJobs;
+
+    const [allJobs, setAllJobs] = useState<Job[]>();
+
+
+    const fetchAllJobs = async () => {
+        try {
+            const response = await JobService.getAllJobs();
+            console.log(response)
+            setAllJobs(response);
+        } catch (error) {
+            console.log(error)
+        }
+    } 
+
+    useEffect(() => {
+       fetchAllJobs();
+    }, [])
+    
+
     return (
         <div>
 
@@ -28,7 +47,7 @@ const JobsTable = () => {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {mockJobData.map((job, index) => (
+                        {allJobs?.map((job, index) => (
                             <Tr key={index}>
                                 <Td>
                                     {job.jobName}
@@ -37,7 +56,14 @@ const JobsTable = () => {
                                     {job.jobGroup}
                                 </Td>
                                 <Td>
-                                    <Button colorScheme='facebook'>See Job Datas</Button>
+                                <CustomModal
+                                        buttonColorScheme='pink'
+                                        buttonText='See Job Datas'
+                                        modalHeader='Job Datas'
+                                    >
+                                    <JobDatas jobDatas={job.jobData}/>
+
+                                    </CustomModal>
                                 </Td>
                                 <Td>
                                     <CustomModal
@@ -49,18 +75,19 @@ const JobsTable = () => {
 
                                     </CustomModal>
                                 </Td>
-                                <Td>
-                                <CustomModal
-                                        buttonColorScheme='pink'
-                                        buttonText='See Job Datas'
-                                        modalHeader='Job Datas'
-                                    >
-                                    <JobDatas jobDatas={job.jobDataMap}/>
-
-                                    </CustomModal>
+                                <Td>                           
+                               <IconButton
+                                icon={<EditIcon />}
+                                colorScheme='orange'
+                                aria-label='Edit'
+                               />                           
                                 </Td>
                                 <Td>
-                                    <Button colorScheme='red'>delete</Button>
+                                <IconButton
+                                icon={<DeleteIcon />}
+                                colorScheme='red'
+                                aria-label='Delete'
+                               />    
                                 </Td>
 
                             </Tr>

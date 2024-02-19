@@ -1,20 +1,34 @@
-import { List, ListItem, Table } from '@chakra-ui/react'
-import React from 'react'
-import { JobTriggers } from '../api/types/JobTriggers'
+import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import React from 'react';
+import { TriggersOfJob } from '../api/types/JobTriggers';
 
-interface JobTriggersProps{
-    jobTriggers: JobTriggers 
+interface JobTriggersProps {
+  jobTriggers: TriggersOfJob[];
 }
 
-const JobTriggersComponent = ({jobTriggers} : JobTriggersProps) => {
-    return (
-        <List spacing={3}>
-                <ListItem>{jobTriggers.cronTime} </ListItem>
-                <ListItem>{jobTriggers.group}</ListItem>
-                <ListItem>{jobTriggers.name}</ListItem>
-                <ListItem>{jobTriggers.cronTime}</ListItem>
-            </List>
-    )
-}
+    const JobTriggersComponent = ({ jobTriggers }: JobTriggersProps) => {
+    console.log(jobTriggers);
 
-export default JobTriggersComponent
+  return (
+    <Table variant="striped" colorScheme="teal">
+      <Thead>
+        <Tr>
+          <Th>Cron Time</Th>
+          <Th>Group</Th>
+          <Th>Name</Th>
+        </Tr>
+      </Thead>
+      <Tbody>
+        {jobTriggers.map((value: TriggersOfJob, index: number) => (
+          <Tr key={index}>
+            <Td>{value.cronTime}</Td>
+            <Td>{value.group}</Td>
+            <Td>{value.name}</Td>
+          </Tr>
+        ))}
+      </Tbody>
+    </Table>
+  );
+};
+
+export default JobTriggersComponent;

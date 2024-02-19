@@ -1,7 +1,7 @@
 export type CreateJob = {
-    emailTo: string,
-    subject: string,
-    body: string,
-    fireDate: Date,
-    timeZone: string
+    email?: string,
+    subject?: string,
+    body?: string,
+    dateTime?: Date,
+    timeZone?: string
 }
