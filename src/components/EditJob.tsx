@@ -1,5 +1,8 @@
 import { FormControl, FormLabel, Input, Button } from '@chakra-ui/react'
-import React, { FormEvent, useEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, ChangeEventHandler, FormEvent, MouseEventHandler, useEffect, useRef, useState } from 'react'
+import { JobService } from '../api/services/JobService'
+import { AddTrigger } from '../api/types/AddTrigger'
+import { CreateJob } from '../api/types/CreateJob'
 import { Job } from '../api/types/Job'
 
 interface EditJobProps {
@@ -12,9 +15,10 @@ const initialRef = useRef(null)
 const [email, setEmail] = useState<string>('');
 const [subject, setSubject] = useState<string>('');
 const [body, setBody] = useState<string>('');
-const [fireTime, setFireTime] = useState<Date>()
+const [fireTime, setFireTime] = useState<string>('');
 
 const result = Object.entries(job.jobData);
+const { timeZone } = Intl.DateTimeFormat().resolvedOptions();
 
 useEffect(() => {
     result.forEach((entry) => {
@@ -29,11 +33,24 @@ useEffect(() => {
     
   }, []);
 
-console.log(result)
 
 const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("hello")
+    const formdata = new FormData(e.currentTarget).get('dateTime')
+    console.log(formdata)
+    let addTriggerUpdate: AddTrigger = {
+      dateTime: fireTime,
+      groupName: job.jobGroup,
+      jobId: job.jobName,
+      timeZone: timeZone
+    }
+    console.log(addTriggerUpdate)
+    await JobService.addTriggersToExistingJob(addTriggerUpdate).then(response=>console.log(response));
+}
+
+const handleFireTime = (e: ChangeEvent<HTMLInputElement>) => {
+  const inputValue = e.target.value;
+  setFireTime(inputValue);
 }
 
   return (
@@ -47,7 +64,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
             <FormLabel>Content</FormLabel>
             <Input disabled value={body} name='body' type='text' placeholder='Content' />
             <FormLabel>Please Provide New Trigger Date</FormLabel>
-            <Input name='dateTime' type='datetime-local' placeholder='Content' />
+            <Input onChange={handleFireTime} name='dateTime' type='datetime-local' placeholder='Content' />
 
             <Button style={{ marginTop: 10, float: 'left', display: 'flex' }} type='submit' colorScheme='whatsapp' mr={3}>Save</Button>
           </FormControl>

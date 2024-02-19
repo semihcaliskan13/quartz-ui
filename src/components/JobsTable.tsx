@@ -19,7 +19,6 @@ const JobsTable = () => {
     const fetchAllJobs = async () => {
         try {
             const response = await JobService.getAllJobs();
-            console.log(response)
             setAllJobs(response);
         } catch (error) {
             console.log(error)

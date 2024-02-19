@@ -7,7 +7,6 @@ interface JobTriggersProps {
 }
 
     const JobTriggersComponent = ({ jobTriggers }: JobTriggersProps) => {
-    console.log(jobTriggers);
 
   return (
     <Table variant='simple' colorScheme="teal">

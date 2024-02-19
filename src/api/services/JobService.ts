@@ -40,15 +40,15 @@ export const JobService = {
         return await response.json();
     },
 
-    addTriggersToExistingJob: async(addTriggerRequest: AddTrigger) : Promise<void> => {
+    addTriggersToExistingJob: async(addTriggerRequest: AddTrigger) : Promise<Response> => {
         const response = await fetch(`${BASE_URL}/schedule-jobs/triggers`, {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
-            }
+            },
+            body: JSON.stringify(addTriggerRequest)
         });
-
-        return await response.json();
+        return await response;
     },
 
     pauseJob: async (groupName: string, jobId: string) : Promise<void> => {

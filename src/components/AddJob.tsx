@@ -15,6 +15,7 @@ const AddJob = () => {
     const formData = new FormData(e.currentTarget);
     let addJobForm: CreateJob = Object.fromEntries(formData.entries());
     addJobForm.timeZone = "Europe/Istanbul";
+    console.log(addJobForm)
     await JobService.saveJob(addJobForm).then(response => {
       console.log(response)
     }
